@@ -6,7 +6,7 @@ import (
 )
 
 var (
-	data []int
+	data []int //这里定义一个切片以下说的数组其实是切片
 )
 
 //获取数组元素个数
@@ -27,13 +27,12 @@ func IsEmpty() bool {
 //最后添加元素
 func AddLast(e int) {
 	data = append(data, e)
-	fmt.Println(data)
 }
 
 func AddFirst(e int) {
 	s := []int{e} //定义一个只有e的切片
 	data = append(s, data...)
-	fmt.Println(data)
+	//fmt.Println(data)
 }
 
 //向指定位置添加元素
@@ -49,9 +48,91 @@ func Add(index, e int) {
 		log.Fatal("Add failed. index < 0 or index >= size.")
 	}
 
-	for i := len(data) - 1; i >= index; i-- {
-		data = append(data[:i], append([]int{e}, data[i:]...)...)
+	data = append(data[:index], append([]int{e}, data[index:]...)...)
+
+}
+
+//获得index索引位置的元素
+func Get(index int) {
+	if index < 0 || index >= len(data) {
+		log.Fatal("Get failed. index < 0 or index >= size.")
+	}
+	fmt.Println(data[index])
+}
+
+//改变某一位置的值
+func Set(index, e int) []int {
+	if index < 0 || index >= len(data) {
+		log.Fatal("Get failed. index < 0 or index >= size.")
 	}
 
-	fmt.Println(data)
+	return append(data[:index], append([]int{e}, data[index+1:]...)...)
+}
+
+//获得数组中的数据
+func GetRes() []int {
+	fmt.Println("数组中的数据为：", data)
+	return data
+}
+
+//查找数组中是否有某个元素
+func Contains(e int) bool {
+	for i := 0; i < len(data); i++ {
+		if data[i] == e {
+			return false
+		}
+	}
+	return false
+}
+
+//查找e在数组中的索引，不存在返回-1
+func Find(e int) int {
+	for i := 0; i < len(data); i++ {
+		if data[i] == e {
+			return i
+		}
+	}
+	return -1
+}
+
+//查找e在数组中的全部索引，不存在返回-1
+func FindAll(e int) []int {
+	var indexs []int
+	for i := 0; i < len(data); i++ {
+		if data[i] == e {
+			indexs = append(indexs, i)
+		}
+	}
+	return indexs
+}
+
+//删除指定位置的元素
+func Del(index int) bool {
+	if index < 0 || index >= len(data) {
+		log.Fatal("Get failed. index < 0 or index >= size.")
+	}
+	data = append(data[:index], data[index+1:]...)
+	return true
+}
+
+//元素若存在则删除
+func RemoveElement(e int) bool {
+	index := Find(e)
+	if index != -1 {
+		Del(index)
+		return true
+	}
+	return false
+}
+
+//删除元素全部元素
+//todo 这里好像有bug
+func RemoveAllElement(e int) {
+	for i, v := range data {
+		fmt.Println("i and v", i, v)
+		if v == e {
+			data = append(data[:i], data[i+1:]...)
+		}
+	}
+	fmt.Println("last data", data)
 }
