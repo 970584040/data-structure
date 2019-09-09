@@ -129,7 +129,6 @@ func RemoveElement(e int) bool {
 //todo 这里好像有bug
 func RemoveAllElement(e int) {
 	for i, v := range data {
-		fmt.Println("i and v", i, v)
 		if v == e {
 			data = append(data[:i], data[i+1:]...)
 		}

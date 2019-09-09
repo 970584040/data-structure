@@ -10,5 +10,4 @@ func main() {
 	Array.Add(1, 6)
 	Array.Add(2, 5)
 	Array.GetRes()
-
 }
