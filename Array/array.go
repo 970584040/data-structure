@@ -61,11 +61,20 @@ func Add(index, e int) {
 }
 
 //获得index索引位置的元素
-func Get(index int) {
+func Get(index int) int {
 	if index < 0 || index >= len(MyArr.Data) {
 		log.Fatal("Get failed. index < 0 or index >= size.")
 	}
 	fmt.Println(MyArr.Data[index])
+	return MyArr.Data[index]
+}
+
+func GetFirst() int {
+	return Get(0)
+}
+
+func GetLast() int {
+	return Get(len(MyArr.Data) - 1)
 }
 
 //改变某一位置的值
@@ -131,6 +140,12 @@ func RemoveElement(e int) bool {
 		return true
 	}
 	return false
+}
+
+//删除最后位置的元素
+func RemveLast() {
+	MyArr.Data = MyArr.Data[:len(MyArr.Data)-1]
+	fmt.Println(MyArr.Data)
 }
 
 //删除元素全部元素
