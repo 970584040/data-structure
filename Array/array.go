@@ -17,6 +17,10 @@ var MyArr = Arr{
 	Data: []int{},
 }
 
+func GetArr() []int {
+	return MyArr.Data
+}
+
 //获取数组元素个数
 func GetSize() int {
 	return len(MyArr.Data)
@@ -124,12 +128,13 @@ func FindAll(e int) []int {
 }
 
 //删除指定位置的元素
-func Del(index int) bool {
+func Del(index int) (bool, int) {
 	if index < 0 || index >= len(MyArr.Data) {
 		log.Fatal("Get failed. index < 0 or index >= size.")
 	}
+	first := MyArr.Data[0]
 	MyArr.Data = append(MyArr.Data[:index], MyArr.Data[index+1:]...)
-	return true
+	return true, first
 }
 
 //元素若存在则删除

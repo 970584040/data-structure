@@ -1,7 +1,8 @@
 package main
 
 import (
-	"./Stack"
+	"./Queue"
+	"fmt"
 )
 
 func main() {
@@ -12,11 +13,21 @@ func main() {
 	//Array.Add(2, 5)
 	//Array.GetRes()
 
-	var i Stack.Stack
-	s := Stack.Stacks{}
-	i = s
-	for k := 0; k < 6; k++ {
-		i.Push(k)
+	//var i Stack.Stack
+	//s := Stack.Stacks{}
+	//i = s
+	//for k := 0; k < 6; k++ {
+	//	i.Push(k)
+	//}
+	//i.Pop()
+
+	queue := Queue.Queues{}
+	for k := 0; k < 10; k++ {
+		queue.EnQueue(k)
+		if k%3 == 2 {
+			queue.DeQueue()
+		}
 	}
-	i.Pop()
+
+	fmt.Println(queue.GetArr())
 }
